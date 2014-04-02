@@ -1,0 +1,19 @@
+DirectoryIndex index.html index.php
+#AddDefaultCharset UTF-8
+#AddType text/javascript .js
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+
+    RewriteCond $1 !^(index\.php|images|css|png|robots\.txt|favicon\.ico)
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule (.*) index.php?/$1 [L]
+
+#	RewriteCond %{HTTP_REFERER} !^$
+#    RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?autodocplus.com.ua [NC]
+#    RewriteRule \.(jpg|jpeg|png|gif)$ - [NC,F,L]
+</IfModule>
+<IfModule !mod_rewrite.c>
+	ErrorDocument 404 /index.php
+</IfModule>

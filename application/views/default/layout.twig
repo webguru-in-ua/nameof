@@ -1,0 +1,94 @@
+{% set navigation_bar = navigation %}
+{% set active_page = active_page|default('index') %}
+<!doctype html>
+<html ng-app>
+<head>
+    <meta charset="utf-8">
+    {% block head %}
+        <title>{% block title %}{% endblock %}</title>
+
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome CSS CDN -->
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    {% endblock %}
+</head>
+<body>
+
+<div id="wrap">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ base_url('admin') }}">NameOf.Me</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+                {% block navigation %}
+                    <ul class="nav navbar-nav navbar-right">
+                        {% for item in navigation_bar %}
+                            <li{% if item[0] == active_page %} class="active"{% endif %}>
+                                <a href="{{ base_url(item[0]) }}">{{ item[1] }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endblock %}
+
+            </div>
+        </div>
+    </nav>
+    <!-- /nav -->
+
+    <div class="container">
+        <div class="row">
+            <div id="sidebar" class="col-xs-3"></div>
+            <div id="content" class="col-xs-9">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+
+
+    </div>
+    <!-- /main container -->
+
+
+</div>
+<!-- /wrap -->
+
+<!-- Sticky footer -->
+<div id="footer">
+    <div class="container">
+        {% block footer %}
+            <p class="text-muted credit">© 2014 nameof.me</p>
+        {% endblock %}
+
+        {{ elapsed_time }} {{ memory_usage }}
+    </div>
+
+</div>
+
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+{% block bottom %}{% endblock %}
+
+
+</body>
+</html>
