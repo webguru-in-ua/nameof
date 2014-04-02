@@ -10,7 +10,7 @@ class Welcome extends CI_Controller {
 	}
 
     public function nameof($uri){
-        $this->data['uri'] = $uri;
+        $this->data['uri'] = 'testok';
         $this->twig->display('index.twig', $this->data);
     }
 
